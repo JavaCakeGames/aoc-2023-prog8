@@ -60,11 +60,11 @@ main {
       ubyte cubeCount
       if @(inAddr + 1) == iso:' ' {
         ; Followed by a space, so number is 1 digit
-        cubeCount = @(inAddr) - 48
+        cubeCount = @(inAddr) ^ 48 ; Subtract 48
         inAddr += 2
       } else {
         ; Number is 2 digits (no triple-digit nums in input)
-        cubeCount = (@(inAddr) - 48) * 10 + (@(inAddr + 1) - 48)
+        cubeCount = (@(inAddr) ^ 48) * 10 + (@(inAddr + 1) ^ 48)
         inAddr += 3
       }
 

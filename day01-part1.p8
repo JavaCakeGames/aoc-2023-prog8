@@ -65,13 +65,13 @@ main {
     for inI in &input to &input + 21495 { ; File length - 1
       if firstDigit == 255 { ; First digit not yet found
         if @(inI) >= '0' { ; No short-circuit eval
-          if @(inI) <= '9' firstDigit = @(inI) - 48
+          if @(inI) <= '9' firstDigit = @(inI) ^ 48 ; subtract 48
         }
       }
       ; Cannot become if-else because some lines only have 1 digit
       if @(inI) != LF {
         if @(inI) >= '0' {
-          if @(inI) <= '9' lastDigit = @(inI) - 48
+          if @(inI) <= '9' lastDigit = @(inI) ^ 48
         }
       } else {
 ;        txt.print_ub(firstDigit * 10 + lastDigit)

@@ -50,7 +50,7 @@ main {
 
       if firstDigit == 255 { ; First digit not yet found
         if wordBuffer[4] >= '0' and wordBuffer[4] <= '9' {
-          firstDigit = wordBuffer[4] - 48
+          firstDigit = wordBuffer[4] ^ 48 ; subtract 48
         } else { ; Oh gosh, it might be written out
           when wordBuffer[4] {
             iso:'e' -> {
@@ -126,7 +126,7 @@ main {
 
       ; Cannot become if-else because some lines only have 1 digit
       if wordBuffer[4] >= '0' and wordBuffer[4] <= '9' {
-        lastDigit = wordBuffer[4] - 48
+        lastDigit = wordBuffer[4] ^ 48
       } else { ; Oh gosh, it might be written out
         when wordBuffer[4] {
           iso:'e' -> {
