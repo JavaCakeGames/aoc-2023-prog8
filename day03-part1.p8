@@ -58,7 +58,9 @@ main {
   ; Of course, it would break C64 compatibility.
   ; "If you set one of the inputs of the multiplier to 1,
   ; you can add 16-bit numbers to a 32-bit accumulator."
-  ubyte[3] @shared @requirezp sum = 0
+  ;ubyte[3] @shared @requirezp sum = 0
+  uword sum
+  ubyte sumHigh
 
   sub start() {
 
@@ -161,21 +163,10 @@ main {
                 number = @(inAddr - 1) ^ 48
               }
             }
-;            txt.print_uw(number)
-;            txt.nl()
 
-            %asm{{
-              clc
-              lda p8_number
-              adc p8_sum
-              sta p8_sum
-              lda p8_number+1
-              adc p8_sum+1
-              sta p8_sum+1
-              lda #0
-              adc p8_sum+2
-              sta p8_sum+2
-            }}
+            sum += number
+            if_cs sumHigh++
+
           }
 
         }
@@ -186,7 +177,7 @@ main {
     } until inAddr >= &padding2
 
     txt.nl()
-    floats.print_f((sum[2] as float * 65536.0) + mkword(sum[1], sum[0]) as float)
+    floats.print_f((sumHigh as float * 65536.0) + sum as float)
     txt.nl()
 
   }
