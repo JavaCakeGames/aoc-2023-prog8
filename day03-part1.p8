@@ -54,7 +54,7 @@ main {
 
 ; Symbols: #$%&*+-/=@
 
-  ubyte[3] @shared @requirezp sum
+  ubyte[3] @shared @requirezp sum = 0
 
   sub start() {
 
