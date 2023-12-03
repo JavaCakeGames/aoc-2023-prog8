@@ -52,43 +52,15 @@ all of the part numbers in the engine schematic? */
 
 main {
 
-; Symbols: #$%&*+-/=@
+  ; Symbols: #$%&*+-/=@
 
+  ; Utilising VERA FX for this addition might be marginally faster?
+  ; Of course, it would break C64 compatibility.
+  ; "If you set one of the inputs of the multiplier to 1,
+  ; you can add 16-bit numbers to a 32-bit accumulator."
   ubyte[3] @shared @requirezp sum = 0
 
   sub start() {
-
-    ; VERA FX attempt
-    /*
-    cx16.VERA_CTRL = %00001100 ; DCSEL=6, ADDR=0
-    %asm{{
-      lda cx16.VERA_FX_ACCUM_RESET
-    }}
-
-    cx16.VERA_ADDR_L = 0
-    cx16.VERA_ADDR_M = 0
-    cx16.VERA_ADDR_H = 0
-
-    cx16.VERA_FX_CACHE_L = 11
-
-    cx16.VERA_DATA0 = 22
-
-    cx16.VERA_CTRL = %00000100 ; DCSEL=2, ADDR=0
-    cx16.VERA_FX_CTRL = %01100000 ; Cache fill, write enable
-    cx16.VERA_FX_MULT = %01000000 ; Accumulate
-    %asm{{
-      lda cx16.VERA_DATA0
-    }}
-
-    cx16.VERA_DATA0 = 0
-
-    cx16.VERA_FX_CTRL = 0
-    cx16.VERA_CTRL = 0
-    txt.nl()
-    txt.print_ub(cx16.vpeek(0, 0))
-    txt.nl()
-
-    return*/
 
     ; Thoughts:
     ; Initially I attempted to scan for symbols and then determine adjacent
