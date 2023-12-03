@@ -200,7 +200,7 @@ main {
               lda p8_number+1
               adc p8_sum+1
               sta p8_sum+1
-              lda #$00
+              lda #0
               adc p8_sum+2
               sta p8_sum+2
             }}
@@ -214,9 +214,7 @@ main {
     } until inAddr >= &padding2
 
     txt.nl()
-
     floats.print_f((sum[2] as float * 65536.0) + mkword(sum[1], sum[0]) as float)
-
     txt.nl()
 
   }
