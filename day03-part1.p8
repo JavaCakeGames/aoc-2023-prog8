@@ -58,9 +58,8 @@ main {
   ; Of course, it would break C64 compatibility.
   ; "If you set one of the inputs of the multiplier to 1,
   ; you can add 16-bit numbers to a 32-bit accumulator."
-  ;ubyte[3] @shared @requirezp sum = 0
   uword sum
-  ubyte sumHigh
+  ubyte sumHigh ; Bits 16-23 of sum
 
   sub start() {
 
