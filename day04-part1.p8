@@ -83,7 +83,7 @@ main {
 
       uword points = 0 ; Contains up to 512
 
-      ubyte[10] winningNums
+      ubyte[10] @zp winningNums
       const ubyte winningNumsMaxIdx = 9
       for cx16.r0L in 0 to 9 {
         if @(inAddr) != iso:' ' winningNums[cx16.r0L] = (@(inAddr) ^ 48) * 10

@@ -29,12 +29,12 @@ What is the sum of all of the calibration values? */
 
 main {
 
-  ubyte @requirezp firstDigit = 255
-  ubyte @requirezp lastDigit = 255
-  uword @requirezp totalCalibration
+  ubyte firstDigit = 255
+  ubyte lastDigit = 255
+  uword totalCalibration
 
   ; one, two, six, four, five, nine, three, seven, eight
-  ubyte[5] @requirezp wordBuffer
+  ubyte[5] @zp wordBuffer
 
   sub start() {
 
