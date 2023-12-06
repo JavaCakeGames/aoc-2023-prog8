@@ -12,6 +12,8 @@ output, compare it using the table below:
 | day02-part2 | 54911           |
 | day03-part1 | 528819          |
 | day04-part1 | 27454           |
+| day06-part1 | 114400          |
+| day06-part2 | 21039729        |
 
 **See also:** [Mark's Advent of Code solutions](https://github.com/markjreed/advent-of-code)  
 (some days have Prog8, some don't)
