@@ -79,70 +79,222 @@ main {
 
     ; First 10 columns of each row can be ignored
     uword inAddr = &input + 10
+    ubyte[10] @zp winningNums
+    ; Potential optimisation:
+    ; Shift winning numbers down when found and have them zero-terminated to
+    ; avoid checking each winning number multiple times.
+    ; In practice, this doesn't save any time. Do not retry!
     repeat 204 { ; lines
 
       uword points = 0 ; Contains up to 512
 
-      ubyte[10] @zp winningNums
-      const ubyte winningNumsMaxIdx = 9
-      for cx16.r0L in 0 to 9 {
-        if @(inAddr) != iso:' ' winningNums[cx16.r0L] = (@(inAddr) ^ 48) * 10
-        else winningNums[cx16.r0L] = 0
-        winningNums[cx16.r0L] += @(inAddr + 1) ^ 48
-        inAddr += 3 ; Advance to next number
-      }
+      ; Manually unrolled loop from 0 to 9
+      if @(inAddr) != iso:' ' winningNums[0] = (@(inAddr) ^ 48) * 10
+      else winningNums[0] = 0
+      winningNums[0] += @(inAddr + 1) ^ 48
+      inAddr += 3 ; Advance to next number
+      if @(inAddr) != iso:' ' winningNums[1] = (@(inAddr) ^ 48) * 10
+      else winningNums[1] = 0
+      winningNums[1] += @(inAddr + 1) ^ 48
+      inAddr += 3 ; Advance to next number
+      if @(inAddr) != iso:' ' winningNums[2] = (@(inAddr) ^ 48) * 10
+      else winningNums[2] = 0
+      winningNums[2] += @(inAddr + 1) ^ 48
+      inAddr += 3 ; Advance to next number
+      if @(inAddr) != iso:' ' winningNums[3] = (@(inAddr) ^ 48) * 10
+      else winningNums[3] = 0
+      winningNums[3] += @(inAddr + 1) ^ 48
+      inAddr += 3 ; Advance to next number
+      if @(inAddr) != iso:' ' winningNums[4] = (@(inAddr) ^ 48) * 10
+      else winningNums[4] = 0
+      winningNums[4] += @(inAddr + 1) ^ 48
+      inAddr += 3 ; Advance to next number
+      if @(inAddr) != iso:' ' winningNums[5] = (@(inAddr) ^ 48) * 10
+      else winningNums[5] = 0
+      winningNums[5] += @(inAddr + 1) ^ 48
+      inAddr += 3 ; Advance to next number
+      if @(inAddr) != iso:' ' winningNums[6] = (@(inAddr) ^ 48) * 10
+      else winningNums[6] = 0
+      winningNums[6] += @(inAddr + 1) ^ 48
+      inAddr += 3 ; Advance to next number
+      if @(inAddr) != iso:' ' winningNums[7] = (@(inAddr) ^ 48) * 10
+      else winningNums[7] = 0
+      winningNums[7] += @(inAddr + 1) ^ 48
+      inAddr += 3 ; Advance to next number
+      if @(inAddr) != iso:' ' winningNums[8] = (@(inAddr) ^ 48) * 10
+      else winningNums[8] = 0
+      winningNums[8] += @(inAddr + 1) ^ 48
+      inAddr += 3 ; Advance to next number
+      if @(inAddr) != iso:' ' winningNums[9] = (@(inAddr) ^ 48) * 10
+      else winningNums[9] = 0
+      winningNums[9] += @(inAddr + 1) ^ 48
+      inAddr += 5 ; Extra advancement due to vertical bar
 
-      inAddr += 2 ; Extra advancement due to vertical bar
-
-      repeat 25 {
+      ; Manually unrolled loop, repeat 25, each number on ticket
+      ; Could be unrolled further at expense of PRG size
+      repeat 5 { ; Each number on ticket
         ubyte thisNum = 0
         if @(inAddr) != iso:' ' thisNum = (@(inAddr) ^ 48) * 10
         thisNum += @(inAddr + 1) ^ 48
-        ;txt.print_ub(thisNum)
-        ;txt.spc()
-        for cx16.r0L in 0 to winningNumsMaxIdx {
-          if thisNum == winningNums[cx16.r0L] {
-            if (points > 0) points *= 2
-            else points = 1
-            ; Potential optimisation: Shift numbers down to avoid checking
-            ;                         winning number multiple times.
-            ; In practice, comes out slower or breaks the program.
-            ;for cx16.r1L in cx16.r0L to winningNumsMaxIdx {
-            ;  winningNums[cx16.r1L] = winningNums[cx16.r1L + 1]
-            ;}
-            ;winningNumsMaxIdx--
-            break
-          }
+        ; Manually unrolled loops from 0 to 9 - iterate through winning numbers
+        if points > 0 {
+          if thisNum == winningNums[0] points *= 2
+          else if thisNum == winningNums[1] points *= 2
+          else if thisNum == winningNums[2] points *= 2
+          else if thisNum == winningNums[3] points *= 2
+          else if thisNum == winningNums[4] points *= 2
+          else if thisNum == winningNums[5] points *= 2
+          else if thisNum == winningNums[6] points *= 2
+          else if thisNum == winningNums[7] points *= 2
+          else if thisNum == winningNums[8] points *= 2
+          else if thisNum == winningNums[9] points *= 2
+        } else {
+          if thisNum == winningNums[0] points = 1
+          else if thisNum == winningNums[1] points = 1
+          else if thisNum == winningNums[2] points = 1
+          else if thisNum == winningNums[3] points = 1
+          else if thisNum == winningNums[4] points = 1
+          else if thisNum == winningNums[5] points = 1
+          else if thisNum == winningNums[6] points = 1
+          else if thisNum == winningNums[7] points = 1
+          else if thisNum == winningNums[8] points = 1
+          else if thisNum == winningNums[9] points = 1
         }
 
-;        for cx16.r0L in 0 to 9 {
-;          txt.print_ub(winningNums[cx16.r0L])
-;          txt.spc()
-;        }
-;        txt.spc()
-;        txt.print_ub(winningNumsMaxIdx)
-;        txt.nl()
         inAddr += 3
+
+        thisNum = 0
+        if @(inAddr) != iso:' ' thisNum = (@(inAddr) ^ 48) * 10
+        thisNum += @(inAddr + 1) ^ 48
+        ; Manually unrolled loops from 0 to 9 - iterate through winning numbers
+        if points > 0 {
+          if thisNum == winningNums[0] points *= 2
+          else if thisNum == winningNums[1] points *= 2
+          else if thisNum == winningNums[2] points *= 2
+          else if thisNum == winningNums[3] points *= 2
+          else if thisNum == winningNums[4] points *= 2
+          else if thisNum == winningNums[5] points *= 2
+          else if thisNum == winningNums[6] points *= 2
+          else if thisNum == winningNums[7] points *= 2
+          else if thisNum == winningNums[8] points *= 2
+          else if thisNum == winningNums[9] points *= 2
+        } else {
+          if thisNum == winningNums[0] points = 1
+          else if thisNum == winningNums[1] points = 1
+          else if thisNum == winningNums[2] points = 1
+          else if thisNum == winningNums[3] points = 1
+          else if thisNum == winningNums[4] points = 1
+          else if thisNum == winningNums[5] points = 1
+          else if thisNum == winningNums[6] points = 1
+          else if thisNum == winningNums[7] points = 1
+          else if thisNum == winningNums[8] points = 1
+          else if thisNum == winningNums[9] points = 1
+        }
+
+        inAddr += 3
+
+        thisNum = 0
+        if @(inAddr) != iso:' ' thisNum = (@(inAddr) ^ 48) * 10
+        thisNum += @(inAddr + 1) ^ 48
+        ; Manually unrolled loops from 0 to 9 - iterate through winning numbers
+        if points > 0 {
+          if thisNum == winningNums[0] points *= 2
+          else if thisNum == winningNums[1] points *= 2
+          else if thisNum == winningNums[2] points *= 2
+          else if thisNum == winningNums[3] points *= 2
+          else if thisNum == winningNums[4] points *= 2
+          else if thisNum == winningNums[5] points *= 2
+          else if thisNum == winningNums[6] points *= 2
+          else if thisNum == winningNums[7] points *= 2
+          else if thisNum == winningNums[8] points *= 2
+          else if thisNum == winningNums[9] points *= 2
+        } else {
+          if thisNum == winningNums[0] points = 1
+          else if thisNum == winningNums[1] points = 1
+          else if thisNum == winningNums[2] points = 1
+          else if thisNum == winningNums[3] points = 1
+          else if thisNum == winningNums[4] points = 1
+          else if thisNum == winningNums[5] points = 1
+          else if thisNum == winningNums[6] points = 1
+          else if thisNum == winningNums[7] points = 1
+          else if thisNum == winningNums[8] points = 1
+          else if thisNum == winningNums[9] points = 1
+        }
+
+        inAddr += 3
+
+        thisNum = 0
+        if @(inAddr) != iso:' ' thisNum = (@(inAddr) ^ 48) * 10
+        thisNum += @(inAddr + 1) ^ 48
+        ; Manually unrolled loops from 0 to 9 - iterate through winning numbers
+        if points > 0 {
+          if thisNum == winningNums[0] points *= 2
+          else if thisNum == winningNums[1] points *= 2
+          else if thisNum == winningNums[2] points *= 2
+          else if thisNum == winningNums[3] points *= 2
+          else if thisNum == winningNums[4] points *= 2
+          else if thisNum == winningNums[5] points *= 2
+          else if thisNum == winningNums[6] points *= 2
+          else if thisNum == winningNums[7] points *= 2
+          else if thisNum == winningNums[8] points *= 2
+          else if thisNum == winningNums[9] points *= 2
+        } else {
+          if thisNum == winningNums[0] points = 1
+          else if thisNum == winningNums[1] points = 1
+          else if thisNum == winningNums[2] points = 1
+          else if thisNum == winningNums[3] points = 1
+          else if thisNum == winningNums[4] points = 1
+          else if thisNum == winningNums[5] points = 1
+          else if thisNum == winningNums[6] points = 1
+          else if thisNum == winningNums[7] points = 1
+          else if thisNum == winningNums[8] points = 1
+          else if thisNum == winningNums[9] points = 1
+        }
+
+        inAddr += 3
+
+        thisNum = 0
+        if @(inAddr) != iso:' ' thisNum = (@(inAddr) ^ 48) * 10
+        thisNum += @(inAddr + 1) ^ 48
+        ; Manually unrolled loops from 0 to 9 - iterate through winning numbers
+        if points > 0 {
+          if thisNum == winningNums[0] points *= 2
+          else if thisNum == winningNums[1] points *= 2
+          else if thisNum == winningNums[2] points *= 2
+          else if thisNum == winningNums[3] points *= 2
+          else if thisNum == winningNums[4] points *= 2
+          else if thisNum == winningNums[5] points *= 2
+          else if thisNum == winningNums[6] points *= 2
+          else if thisNum == winningNums[7] points *= 2
+          else if thisNum == winningNums[8] points *= 2
+          else if thisNum == winningNums[9] points *= 2
+        } else {
+          if thisNum == winningNums[0] points = 1
+          else if thisNum == winningNums[1] points = 1
+          else if thisNum == winningNums[2] points = 1
+          else if thisNum == winningNums[3] points = 1
+          else if thisNum == winningNums[4] points = 1
+          else if thisNum == winningNums[5] points = 1
+          else if thisNum == winningNums[6] points = 1
+          else if thisNum == winningNums[7] points = 1
+          else if thisNum == winningNums[8] points = 1
+          else if thisNum == winningNums[9] points = 1
+        }
+
+        inAddr += 3
+
       }
-      ;break
-      ;txt.nl()
 
       totalPoints += points
       inAddr += 10
-
-      ;txt.print_uw(points)
-      ;txt.print(", ")
-      ;txt.print_uw(totalPoints)
-      ;txt.nl()
-      ;return
 
     }
 
     txt.nl()
     txt.print_uw(totalPoints) ; 27454
     txt.nl()
-    ;floats.print_f(ti())
-    ;txt.nl()
+    floats.print_f(ti())
+    txt.nl()
 
   }
 
