@@ -57,6 +57,7 @@ of the IDs of those games? */
 %zeropage basicsafe
 %option no_sysinit
 %import textio
+%encoding iso
 
 main {
 
@@ -70,7 +71,7 @@ main {
 
       forStart:
       ubyte cubeCount
-      if @(inAddr + 1) == iso:' ' {
+      if @(inAddr + 1) == ' ' {
         ; Followed by a space, so number is 1 digit
         cubeCount = @(inAddr) ^ 48 ; Subtract 48
         inAddr += 2
@@ -87,39 +88,39 @@ main {
 ;      txt.nl()
 
       when @(inAddr) {
-        iso:'r' -> {
+        'r' -> {
           inAddr += 3
           if cubeCount > 12 {
             do {
               inAddr++
-            } until @(inAddr) == iso:':'
+            } until @(inAddr) == ':'
             inAddr += 2
             continue
           }
         }
-        iso:'g' -> {
+        'g' -> {
           inAddr += 5
           if cubeCount > 13 {
             do {
               inAddr++
-            } until @(inAddr) == iso:':'
+            } until @(inAddr) == ':'
             inAddr += 2
             continue
           }
         }
-        iso:'b' -> {
+        'b' -> {
           inAddr += 4
           if cubeCount > 14 {
             do {
               inAddr++
-            } until @(inAddr) == iso:':'
+            } until @(inAddr) == ':'
             inAddr += 2
             continue
           }
         }
       }
 
-      if @(inAddr) == iso:'\n' {
+      if @(inAddr) == '\n' {
 ;        txt.print_uw(gameId)
 ;        txt.nl()
         idSum += gameId

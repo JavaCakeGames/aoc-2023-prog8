@@ -68,6 +68,7 @@ worth in total? */
 
 %zeropage basicsafe
 %option no_sysinit
+%encoding iso
 %import textio
 %import floats ; For timing
 
@@ -89,43 +90,43 @@ main {
       uword points = 0 ; Contains up to 512
 
       ; Manually unrolled loop from 0 to 9
-      if @(inAddr) != iso:' ' winningNums[0] = (@(inAddr) ^ 48) * 10
+      if @(inAddr) != ' ' winningNums[0] = (@(inAddr) ^ 48) * 10
       else winningNums[0] = 0
       winningNums[0] += @(inAddr + 1) ^ 48
       inAddr += 3 ; Advance to next number
-      if @(inAddr) != iso:' ' winningNums[1] = (@(inAddr) ^ 48) * 10
+      if @(inAddr) != ' ' winningNums[1] = (@(inAddr) ^ 48) * 10
       else winningNums[1] = 0
       winningNums[1] += @(inAddr + 1) ^ 48
       inAddr += 3 ; Advance to next number
-      if @(inAddr) != iso:' ' winningNums[2] = (@(inAddr) ^ 48) * 10
+      if @(inAddr) != ' ' winningNums[2] = (@(inAddr) ^ 48) * 10
       else winningNums[2] = 0
       winningNums[2] += @(inAddr + 1) ^ 48
       inAddr += 3 ; Advance to next number
-      if @(inAddr) != iso:' ' winningNums[3] = (@(inAddr) ^ 48) * 10
+      if @(inAddr) != ' ' winningNums[3] = (@(inAddr) ^ 48) * 10
       else winningNums[3] = 0
       winningNums[3] += @(inAddr + 1) ^ 48
       inAddr += 3 ; Advance to next number
-      if @(inAddr) != iso:' ' winningNums[4] = (@(inAddr) ^ 48) * 10
+      if @(inAddr) != ' ' winningNums[4] = (@(inAddr) ^ 48) * 10
       else winningNums[4] = 0
       winningNums[4] += @(inAddr + 1) ^ 48
       inAddr += 3 ; Advance to next number
-      if @(inAddr) != iso:' ' winningNums[5] = (@(inAddr) ^ 48) * 10
+      if @(inAddr) != ' ' winningNums[5] = (@(inAddr) ^ 48) * 10
       else winningNums[5] = 0
       winningNums[5] += @(inAddr + 1) ^ 48
       inAddr += 3 ; Advance to next number
-      if @(inAddr) != iso:' ' winningNums[6] = (@(inAddr) ^ 48) * 10
+      if @(inAddr) != ' ' winningNums[6] = (@(inAddr) ^ 48) * 10
       else winningNums[6] = 0
       winningNums[6] += @(inAddr + 1) ^ 48
       inAddr += 3 ; Advance to next number
-      if @(inAddr) != iso:' ' winningNums[7] = (@(inAddr) ^ 48) * 10
+      if @(inAddr) != ' ' winningNums[7] = (@(inAddr) ^ 48) * 10
       else winningNums[7] = 0
       winningNums[7] += @(inAddr + 1) ^ 48
       inAddr += 3 ; Advance to next number
-      if @(inAddr) != iso:' ' winningNums[8] = (@(inAddr) ^ 48) * 10
+      if @(inAddr) != ' ' winningNums[8] = (@(inAddr) ^ 48) * 10
       else winningNums[8] = 0
       winningNums[8] += @(inAddr + 1) ^ 48
       inAddr += 3 ; Advance to next number
-      if @(inAddr) != iso:' ' winningNums[9] = (@(inAddr) ^ 48) * 10
+      if @(inAddr) != ' ' winningNums[9] = (@(inAddr) ^ 48) * 10
       else winningNums[9] = 0
       winningNums[9] += @(inAddr + 1) ^ 48
       inAddr += 5 ; Extra advancement due to vertical bar
@@ -134,7 +135,7 @@ main {
       ; Could be unrolled further at expense of PRG size
       repeat 5 { ; Each number on ticket
         ubyte thisNum = 0
-        if @(inAddr) != iso:' ' thisNum = (@(inAddr) ^ 48) * 10
+        if @(inAddr) != ' ' thisNum = (@(inAddr) ^ 48) * 10
         thisNum += @(inAddr + 1) ^ 48
         ; Manually unrolled loops from 0 to 9 - iterate through winning numbers
         if points > 0 {
@@ -164,7 +165,7 @@ main {
         inAddr += 3
 
         thisNum = 0
-        if @(inAddr) != iso:' ' thisNum = (@(inAddr) ^ 48) * 10
+        if @(inAddr) != ' ' thisNum = (@(inAddr) ^ 48) * 10
         thisNum += @(inAddr + 1) ^ 48
         ; Manually unrolled loops from 0 to 9 - iterate through winning numbers
         if points > 0 {
@@ -194,7 +195,7 @@ main {
         inAddr += 3
 
         thisNum = 0
-        if @(inAddr) != iso:' ' thisNum = (@(inAddr) ^ 48) * 10
+        if @(inAddr) != ' ' thisNum = (@(inAddr) ^ 48) * 10
         thisNum += @(inAddr + 1) ^ 48
         ; Manually unrolled loops from 0 to 9 - iterate through winning numbers
         if points > 0 {
@@ -224,7 +225,7 @@ main {
         inAddr += 3
 
         thisNum = 0
-        if @(inAddr) != iso:' ' thisNum = (@(inAddr) ^ 48) * 10
+        if @(inAddr) != ' ' thisNum = (@(inAddr) ^ 48) * 10
         thisNum += @(inAddr + 1) ^ 48
         ; Manually unrolled loops from 0 to 9 - iterate through winning numbers
         if points > 0 {
@@ -254,7 +255,7 @@ main {
         inAddr += 3
 
         thisNum = 0
-        if @(inAddr) != iso:' ' thisNum = (@(inAddr) ^ 48) * 10
+        if @(inAddr) != ' ' thisNum = (@(inAddr) ^ 48) * 10
         thisNum += @(inAddr + 1) ^ 48
         ; Manually unrolled loops from 0 to 9 - iterate through winning numbers
         if points > 0 {

@@ -25,6 +25,7 @@ What is the sum of all of the calibration values? */
 
 %zeropage basicsafe
 %option no_sysinit
+%encoding iso
 %import textio
 
 main {
@@ -53,18 +54,18 @@ main {
         if firstDigit == 255 firstDigit = lastDigit
       } else { ; Oh gosh, it might be written out
         when wordBuffer[4] {
-          iso:'e' -> {
+          'e' -> {
             ; one, five, nine, three
-            if wordBuffer[2] == iso:'i' {
+            if wordBuffer[2] == 'i' {
               ; five, nine
               when wordBuffer[1] {
-                iso:'f' -> {
-                  if wordBuffer[3] != iso:'v' continue
+                'f' -> {
+                  if wordBuffer[3] != 'v' continue
                   lastDigit = 5
                   if firstDigit == 255 firstDigit = 5
                 }
-                iso:'n' -> {
-                  if wordBuffer[3] != iso:'n' continue
+                'n' -> {
+                  if wordBuffer[3] != 'n' continue
                   lastDigit = 9
                   if firstDigit == 255 firstDigit = 9
                 }
@@ -72,62 +73,62 @@ main {
             } else {
               ; one, three
               when wordBuffer[2] {
-                iso:'o' -> {
-                  if wordBuffer[3] != iso:'n' continue
+                'o' -> {
+                  if wordBuffer[3] != 'n' continue
                   lastDigit = 1
                   if firstDigit == 255 firstDigit = 1
                 }
-                iso:'r' -> {
-                  if wordBuffer[0] != iso:'t' continue
-                  if wordBuffer[1] != iso:'h' continue
-                  if wordBuffer[3] != iso:'e' continue
+                'r' -> {
+                  if wordBuffer[0] != 't' continue
+                  if wordBuffer[1] != 'h' continue
+                  if wordBuffer[3] != 'e' continue
                   lastDigit = 3
                   if firstDigit == 255 firstDigit = 3
                 }
               }
             }
           }
-          iso:'n' -> {
+          'n' -> {
             ; seven
-            if wordBuffer[0] != iso:'s' continue
-            if wordBuffer[1] != iso:'e' continue
-            if wordBuffer[2] != iso:'v' continue
-            if wordBuffer[3] != iso:'e' continue
+            if wordBuffer[0] != 's' continue
+            if wordBuffer[1] != 'e' continue
+            if wordBuffer[2] != 'v' continue
+            if wordBuffer[3] != 'e' continue
             lastDigit = 7
             if firstDigit == 255 firstDigit = 7
           }
-          iso:'o' -> {
+          'o' -> {
             ; two
-            if wordBuffer[2] != iso:'t' continue
-            if wordBuffer[3] != iso:'w' continue
+            if wordBuffer[2] != 't' continue
+            if wordBuffer[3] != 'w' continue
             lastDigit = 2
             if firstDigit == 255 firstDigit = 2
           }
-          iso:'r' -> {
+          'r' -> {
             ; four
-            if wordBuffer[1] != iso:'f' continue
-            if wordBuffer[2] != iso:'o' continue
-            if wordBuffer[3] != iso:'u' continue
+            if wordBuffer[1] != 'f' continue
+            if wordBuffer[2] != 'o' continue
+            if wordBuffer[3] != 'u' continue
             lastDigit = 4
             if firstDigit == 255 firstDigit = 4
           }
-          iso:'t' -> {
+          't' -> {
             ; eight
-            if wordBuffer[0] != iso:'e' continue
-            if wordBuffer[1] != iso:'i' continue
-            if wordBuffer[2] != iso:'g' continue
-            if wordBuffer[3] != iso:'h' continue
+            if wordBuffer[0] != 'e' continue
+            if wordBuffer[1] != 'i' continue
+            if wordBuffer[2] != 'g' continue
+            if wordBuffer[3] != 'h' continue
             lastDigit = 8
             if firstDigit == 255 firstDigit = 8
           }
-          iso:'x' -> {
+          'x' -> {
             ; six
-            if wordBuffer[2] != iso:'s' continue
-            if wordBuffer[3] != iso:'i' continue
+            if wordBuffer[2] != 's' continue
+            if wordBuffer[3] != 'i' continue
             lastDigit = 6
             if firstDigit == 255 firstDigit = 6
           }
-          iso:'\n' -> {
+          '\n' -> {
 ;            txt.print_ub(firstDigit * 10 + lastDigit)
 ;            txt.nl()
             totalCalibration += firstDigit * 10 + lastDigit

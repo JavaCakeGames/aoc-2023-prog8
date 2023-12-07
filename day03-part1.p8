@@ -49,6 +49,7 @@ all of the part numbers in the engine schematic? */
 
 %zeropage basicsafe
 %option no_sysinit
+%encoding iso
 %import textio
 %import floats
 
@@ -106,8 +107,8 @@ main {
 
           ; Check right direction for symbol.
           ; We already know there isn't a number at this position.
-          if @(inAddr) != iso:'.' {
-            if @(inAddr) != iso:'\n' {
+          if @(inAddr) != '.' {
+            if @(inAddr) != '\n' {
               symbolAdjacent = true
               goto ifSymAdj
             }
@@ -115,8 +116,8 @@ main {
 
           ; Check left direction for symbol.
           ; There can't be a number at this position.
-          if @(inAddr - numLength - 1) != iso:'.' {
-            if @(inAddr - numLength - 1) != iso:'\n' {
+          if @(inAddr - numLength - 1) != '.' {
+            if @(inAddr - numLength - 1) != '\n' {
               symbolAdjacent = true
               goto ifSymAdj
             }
@@ -129,8 +130,8 @@ main {
           ; Check up for symbol.
           uword tmpAddr = inAddr - numLength - 142
           repeat numLength + 2 {
-            if @(tmpAddr) != iso:'.' {
-              if @(tmpAddr) != iso:'\n' {
+            if @(tmpAddr) != '.' {
+              if @(tmpAddr) != '\n' {
                 symbolAdjacent = true
                 goto ifSymAdj
               }
@@ -141,8 +142,8 @@ main {
           ; Check down for symbol.
           tmpAddr = inAddr - numLength + 140
           repeat numLength + 2 {
-            if @(tmpAddr) != iso:'.' {
-              if @(tmpAddr) != iso:'\n' {
+            if @(tmpAddr) != '.' {
+              if @(tmpAddr) != '\n' {
                 symbolAdjacent = true
                 goto ifSymAdj
               }

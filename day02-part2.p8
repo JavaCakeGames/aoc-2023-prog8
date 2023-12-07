@@ -40,6 +40,7 @@ What is the sum of the power of these sets? */
 
 %zeropage basicsafe
 %option no_sysinit
+%encoding iso
 %import textio
 
 main {
@@ -58,7 +59,7 @@ main {
 
       forStart:
       ubyte cubeCount
-      if @(inAddr + 1) == iso:' ' {
+      if @(inAddr + 1) == ' ' {
         ; Followed by a space, so number is 1 digit
         cubeCount = @(inAddr) ^ 48 ; Subtract 48
         inAddr += 2
@@ -69,21 +70,21 @@ main {
       }
 
       when @(inAddr) {
-        iso:'r' -> {
+        'r' -> {
           if (cubeCount > minRed) minRed = cubeCount
           inAddr += 3
         }
-        iso:'g' -> {
+        'g' -> {
           if (cubeCount > minGreen) minGreen = cubeCount
           inAddr += 5
         }
-        iso:'b' -> {
+        'b' -> {
           if (cubeCount > minBlue) minBlue = cubeCount
           inAddr += 4
         }
       }
 
-      if @(inAddr) == iso:'\n' {
+      if @(inAddr) == '\n' {
         totalPower += minRed as uword * minGreen as uword * minBlue as uword
 ;        txt.print_ub(minRed)
 ;        txt.spc()

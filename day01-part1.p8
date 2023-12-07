@@ -48,11 +48,11 @@ calibration values? */
 
 %zeropage basicsafe
 %option no_sysinit
+%encoding iso
 %import textio
 
 main {
 
-  const ubyte LF = 10 ; ISO chars don't work on non-X16 targets in Prog8 9.6
   ubyte firstDigit = 255
   ubyte lastDigit = 255
   uword totalCalibration
@@ -69,7 +69,7 @@ main {
         }
       }
       ; Cannot become if-else because some lines only have 1 digit
-      if @(inI) != LF {
+      if @(inI) != '\n' {
         if @(inI) >= '0' {
           if @(inI) <= '9' lastDigit = @(inI) ^ 48
         }
