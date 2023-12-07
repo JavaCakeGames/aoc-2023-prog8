@@ -1,5 +1,4 @@
 /* https://adventofcode.com/2023/day/6
---- Part Two ---
 
 As the race is about to start, you realize the piece of paper with race
 times and record distances you got earlier actually just has very bad
