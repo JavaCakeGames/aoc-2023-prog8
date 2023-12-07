@@ -56,8 +56,8 @@ of the IDs of those games? */
 
 %zeropage basicsafe
 %option no_sysinit
-%import textio
 %encoding iso
+%import textio
 
 main {
 
