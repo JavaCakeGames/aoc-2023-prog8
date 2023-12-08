@@ -28,8 +28,7 @@ calibration values? */
 
 main {
 
-  ubyte firstDigit = 255
-  ubyte lastDigit = 255
+  ubyte firstDigit, lastDigit = 255
   uword totalCalibration
 
   sub start() {

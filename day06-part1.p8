@@ -88,8 +88,7 @@ main {
 
   sub start() {
 
-    ubyte minButtonTime = 0
-    ubyte maxButtonTime = 0
+    ubyte minButtonTime, maxButtonTime = 0
     uword totalPossibilities
     ubyte totalPossibilitiesHigh ; Bits 16-23
 

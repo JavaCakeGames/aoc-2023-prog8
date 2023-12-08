@@ -29,8 +29,7 @@ What is the sum of all of the calibration values? */
 
 main {
 
-  ubyte firstDigit = 255
-  ubyte lastDigit = 255
+  ubyte firstDigit, lastDigit = 255
   uword totalCalibration
 
   ; one, two, six, four, five, nine, three, seven, eight
