@@ -50,7 +50,7 @@ main {
     ubyte minRed, minGreen, minBlue
     for gameId in 1 to 100 {
 
-      minRed, = minGreen = minBlue = 0
+      minRed = minGreen = minBlue = 0
 
       forStart:
       ubyte cubeCount
