@@ -46,11 +46,11 @@ main {
 
     ubyte gameId
     uword inAddr = &input + 8
+
+    ubyte minRed, minGreen, minBlue
     for gameId in 1 to 100 {
 
-      ubyte minRed = 0
-      ubyte minGreen = 0
-      ubyte minBlue = 0
+      minRed, = minGreen = minBlue = 0
 
       forStart:
       ubyte cubeCount
