@@ -33,8 +33,8 @@ How many ways can you beat the record in this one much longer race? */
 main {
 
   ; Input:
-  float time = 35937366.0
-  float distance = 212206012011044.0
+  const float time = 35_937_366.0
+  const float distance = 212_206_012_011_044.0
 
   ; Takes approximately 100 minutes to run on Commander X16.
   ; So let's call it 800 minutes on Commodore 64.
